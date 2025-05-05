@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxéia Noir</title>
+
+  <link rel="icon" type="image/x-icon"
+    href="https://media1.thehungryjpeg.com/thumbs2/ori_4019331_wkfvh9s1x0jepukkhbuzxp28uj546f6u0ziupcvk_ln-monogram-logo-design-v6.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
+  <script src="./script.js" defer></script>
+</head>
+
+<body class="bg-teal-50 text-white font-poppins flex flex-col ">
+  <nav class="bg-emerald-900 flex items-center h-[8rem] sticky justify-between p-10 ">
+    <div class="logo text-amber-400 font-bold text-4xl">
+      Luxéria Noir
+      <!-- <div> -->
+      <p class="slogan font-thin font-sans text-sm">Designed for dazzle, made to last</p>
+      <!-- </div> -->
+    </div>
+
+    <div class="filter mr-26">
+      <label class="font-thin m-5 text-center" for="filter">Filter by category</label>
+      <select
+        class="bg-transparent rounded-full text-amber-400 border border-white h-auto items-center justify-content-center pl-25 pr-20 p-2 text-center"
+        name="filter" id="filter">
+        <option value="">All Categories</option>
+        <option value="groceries">groceries</option>
+        <option value="beauty">beauty</option>
+        <option value="fragrances">fragrances</option>
+        <option value="furniture">furniture</option>
+      </select>
+    </div>
+
+    <div class="right flex items-center gap-5 p-10">
+      <div>
+        <a class="hover:text-amber-400 hover:font-bold"
+          onclick="document.getElementById('id01').style.display='block'">Login</a>
+      </div>
+      <div>
+        <a class="hover:text-amber-400 hover:font-bold" onclick="document.getElementById('id03').style.display='block'"
+          style="width:auto;">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <div class="bunner">
+      <img class="h-[35rem] w-full"
+        src="https://img1.wsimg.com/isteam/stock/8971/:/cr=t:15.96%25,l:0%25,w:100%25,h:68.09%25/rs=w:515,h:234,cg:true"
+        alt="" />
+    </div>
+  </section>
+
+  <div class="sideNav z-10 bg-emerald-900 right-0 top-[40%] fixed w-[5%] h-auto p-[1.2rem] rounded-3xl border]">
+    <ul class="">
+      <div class="cartCount position-relative mb-5 ">
+        <span class="bg-amber-400 rounded-full p-2 m-3 ">4</span>
+        <i class="bi text-3xl bi-bag-fill"></i>
+      </div>
+      <div>
+        <i class="bi text-3xl bi-heart-fill"></i>
+      </div>
+    </ul>
+  </div>
+
+  <!-- login modal -->
+  <div id="id01"
+    class="modalLogin hidden fixed inset-0 w-full h-full overflow-auto bg-[rgba(8,63,26,0.364)] pt-15 z-[5]">
+
+    <form
+      class="modal-content justify-content-center items-center bg-white p-[5rem] mt-[5rem] ml-[35%] w-[35%] h-auto rounded-lg animate z-100"
+      action="/action_page.php" method="post">
+
+      <div class="container items-center justify-content-center">
+
+        <div class="loginTitle mt-2 text-center">
+          <h1 class="text-center text-emerald-900 font-bold text-3xl  ">Login</h1>
+
+        </div>
+
+        <div class="Username ">
+          <label class="text-black" for="uname">Username</label>
+          <input class="rounded-md border-black items-center mb-5 w-full text-black p-3 border" type="text"
+            placeholder="Enter Username" name="uname" required>
+
+        </div>
+
+        <div class="password">
+          <label class="text-black" for="psw">Password</label>
+          <input class="rounded-md border-black items-center text-black w-full p-3  border" type="password"
+            placeholder="Enter Password" name="psw" required>
+
+        </div>
+
+        <div class="container text-center">
+
+          <span> <a class="psw items-end left-[5rem] italic relative pl-25 hover:font-bold text-emerald-900"
+              href="#">Forgot password?</a></span>
+        </div>
+
+        <button class="btn-login bg-emerald-900 text-white mt-2 h-12 w-full rounded-full h-6 "
+          type="submit">Login</button>
+
+        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+          class="cancelbtn hover:bg-red-500 hover:text-white text-red-500 mt-2 h-12 w-[100%] rounded-full h-6 ">Cancel</button>
+      </div>
+
+
+    </form>
+  </div>
+
+  <!-- sign up -->
+  <div id="id03" class="modalReg ">
+    <span onclick="document.getElementById('id03').style.display='none'" class="close"
+      title="Close Modal">&times;</span>
+    <form
+      class="modal-contentReg justify-content-center items-center bg-white mt-0 p-[5rem] ml-[35%] w-[35%] h-~ rounded-lg animate z-100"
+      action="/action_page.php">
+
+      <div class="container items-center justify-content-center">
+
+        <div class=" border border-b-amber-500 mb-5">
+          <h1 class="text-center text-emerald-900 font-bold text-3xl  ">Sign Up</h1>
+          <p class="text-emerald-900 text-xl mb-5">Please fill in this form to create an account.</p>
+        </div>
+
+        <hr>
+
+        <label class="text-black text-start" for="email">Full Name</label>
+        <div>
+          <input class="rounded-md border-black items-center text-black p-3  mb-5 w-full border" type="text"
+            placeholder="Enter your full name" name="email" required>
+        </div>
+
+        <label class="text-black " for="email">Email</label>
+        <div>
+          <input class="rounded-md border-black items-center text-black p-3  mb-5 w-full  border" type="email"
+            placeholder="Enter Email" name="email" required>
+        </div>
+
+        <label class="text-black " for="psw">Password</label>
+        <div>
+          <input class="rounded-md border-black items-center text-black p-3  mb-5 w-full border" type="password"
+            placeholder="Enter Password" name="psw" required>
+        </div>
+
+        <label class="text-black " for="psw-repeat">Confirm Password</label>
+        <div>
+          <input class="rounded-md border-black items-center text-black p-3  mb-5 w-full border" type="password"
+            placeholder="Enter your Password again" name="psw-repeat" required>
+        </div>
+
+        <p class="text-black mt-2">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms &
+            Privacy</a>.</p>
+
+        <button class="signUpBtn bg-emerald-900 text-white mt-2 h-12 w-full rounded-full h-6 " type="submit"
+          class="signupbtn">Sign Up</button>
+        <button type="button" onclick="document.getElementById('id03').style.display='none'"
+          class="cancelbtn hover:bg-red-500 hover:text-white text-red-500 mt-2 h-12 w-full rounded-full h-6 ">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- cart modal -->
+  <dialog class="w-[50%] overflow-x-hidden m-[auto] pr-[3rem]" id="cart-modal">
+    <div class="modal-header border border-white border-b-amber-500 mb-5 ">
+      <h2 class="mb-5 mt-[3rem] text-emerald-900 text-3xl  ">Cart Contents</h2>
+      <button
+        class="modal-close bg-emerald-900 text-3xl text-amber-400 rounded-full absolute top-10 right-10 ">&times;</button>
+    </div>
+    <div class="modal-content flex flex-col">
+      <!-- Cart items will be hardcoded here -->
+      <div class="cart-item">
+        <img src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
+          alt="Essence Mascara Lash Princess" class="cart-item-image" />
+        <div class="cart-item-info">
+          <h4 class="cart-item-title">Essence Mascara Lash Princess</h4>
+          <p class="cart-item-price">Price: R9.99</p>
+          <p class="cart-item-quantity">Quantity: 1</p>
+        </div>
+      </div>
+      <div class="cart-item">
+        <img src="https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png"
+          alt="Eyeshadow Palette with Mirror" class="cart-item-image" />
+        <div class="cart-item-info">
+          <h4 class="cart-item-title">Eyeshadow Palette with Mirror</h4>
+          <p class="cart-item-price">Price: R19.99</p>
+          <p class="cart-item-quantity">Quantity: 1</p>
+        </div>
+      </div>
+      <div class="cart-item">
+        <img src="https://cdn.dummyjson.com/products/images/beauty/Powder%20Canister/thumbnail.png"
+          alt="Powder Canister" class="cart-item-image" />
+        <div class="cart-item-info">
+          <h4 class="cart-item-title">Powder Canister</h4>
+          <p class="cart-item-price">Price: R14.99</p>
+          <p class="cart-item-quantity">Quantity: 1</p>
+        </div>
+      </div>
+      <div class="cart-summary">
+        <h3>Cart Summary</h3>
+        <p>Total: R44.97</p>
+        <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 text-white w-full">Checkout</button>
+      </div>
+    </div>
+  </dialog>
+  <!--  -->
+
+
+  <!-- product modal -->
+  <dialog class="w-[50%] overflow-x-hidden m-[auto] pr-[3rem]" id="product-modal">
+    <div class="modal-header border border-white border-b-amber-500 mb-5 ">
+      <h2 class="mb-5 mt-[3rem] text-emerald-900 text-3xl  ">Product Details</h2>
+      <button
+        class="modal-close bg-emerald-900 text-3xl text-amber-400 rounded-full absolute top-10 right-10 ">&times;</button>
+    </div>
+
+    <div class="detailsModal">
+
+      <div class="product">
+        <img src="https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/thumbnail.png" alt="" />
+
+        <div class="discount">19.6%</div>
+
+        <div class="details">
+          <div class="title">Red Nail Polish</div>
+          <div class="price">R32.79</div>
+          <div class="btn-group">
+            <button class="btn-secondary">Add to WishList</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="slideshow-container">
+
+        <div class="mySlides fade">
+          <img src="https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/thumbnail.png" alt="" />
+        </div>
+
+        <div class="mySlides fade">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLRhyAAsqndCg19JQfYlAGayKT7K4LttU4mg&s"
+            alt="" />
+        </div>
+
+        <div class="mySlides fade">
+          <img src="img_mountains_wide.jpg" style="width:100%">
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+
+      </div>
+
+    </div>
+  </dialog>
+
+  <!--  -->
+
+  <main class="p-40 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-20">
+
+
+    <div
+      class="product h-[35rem] bg-white relative overflow-x-hidden rounded-3xl hover:shadow-[-1px_4px_13px_-2px_rgb(43,115,155)] transition-transform">
+      <img class="w-full h-[60%] mt-2 fit-cover"
+        src="https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/thumbnail.png" alt="" />
+
+      <div class="discount bg-emerald-800 text-amber-400 top-0 left-0 absolute p-4">19.6%</div>
+
+      <div class="details relative text-center p-10">
+        <div class="reviews text-emerald-900 absolute right-[2.5rem]"><i class="bi text-amber-400 bi-star-fill"></i> 4.8
+        </div>
+        <div class="title text-xl text-gray-400">Red Nail Polish</div>
+        <div class="price text-3xl font-bold text-emerald-900 ">R32.79</div>
+        <div class="btn-group h-10 flex gap-2 mt-5">
+          <button
+            class="viewBtn flex-1 bg-emerald-900 rounded-full text-white transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400">View</button>
+          <button
+            class="cartBtn flex-1 border border-emerald-900 rounded-full transform hover:scale-105 text-emerald-900 text-sm"><i
+              class="bi text-emerald-900 text-xl bi-cart-check-fill"></i> Buy</button>
+          <button
+            class="wishListBtn flex-1 border border-amber-400 rounded-full transform hover:scale-105 text-amber-400 text-sm "><i
+              class="bi text-amber-400 text-xl bi-heart-fill"></i> Favourite</button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="product h-[35rem] bg-white relative overflow-x-hidden rounded-3xl hover:shadow-[-1px_4px_13px_-2px_rgb(43,115,155)] transition-transform">
+      <img class="w-full h-[60%] mt-2 fit-cover"
+        src="https://cdn.dummyjson.com/products/images/beauty/Red%20Lipstick/thumbnail.png" alt="" />
+
+      <div class="discount bg-emerald-800 text-amber-400 top-0 left-0 absolute p-4">9.6%</div>
+
+      <div class="details relative text-center p-10">
+        <div class="reviews text-emerald-900 absolute right-[2.5rem]"><i class="bi text-amber-400 bi-star-fill"></i> 4.8
+        </div>
+        <div class="title text-xl text-gray-400">Red Lipstick</div>
+        <div class="price text-3xl font-bold text-emerald-900 ">R92.99</div>
+        <div class="btn-group h-10 flex gap-2 mt-5">
+          <button
+            class="viewBtn flex-1 bg-emerald-900 rounded-full text-white transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400">View</button>
+          <button
+            class="cartBtn flex-1 border border-emerald-900 rounded-full transform hover:scale-105 text-emerald-900 text-sm"><i
+              class="bi text-emerald-900 text-xl bi-cart-check-fill"></i> Buy</button>
+          <button
+            class="wishListBtn flex-1 border border-amber-400 rounded-full transform hover:scale-105 text-amber-400 text-sm "><i
+              class="bi text-amber-400 text-xl bi-heart-fill"></i> Favourite</button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="product h-[35rem] bg-white relative overflow-x-hidden rounded-3xl hover:shadow-[-1px_4px_13px_-2px_rgb(43,115,155)] transition-transform">
+      <img class="w-full h-[60%] mt-2 fit-cover"
+        src=https://cdn.dummyjson.com/products/images/beauty/Powder%20Canister/1.png alt="">
+
+      <div class="discount bg-emerald-800 text-amber-400 top-0 left-0 absolute p-4">11.6%</div>
+
+      <div class="details relative text-center p-10">
+        <div class="reviews text-emerald-900 absolute right-[2.5rem]"><i class="bi text-amber-400 bi-star-fill"></i> 4.8
+        </div>
+        <div class="title title text-xl text-gray-400">Essence Mascara Lash</div>
+        <div class="price text-3xl font-bold text-emerald-900 ">R150.99</div>
+        <div class="btn-group h-10 flex gap-2 mt-5">
+          <button
+            class="viewBtn flex-1 bg-emerald-900 rounded-full text-white transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400">View</button>
+          <button
+            class="cartBtn flex-1 border border-emerald-900 rounded-full transform hover:scale-105 text-emerald-900 text-sm"><i
+              class="bi text-emerald-900 text-xl bi-cart-check-fill"></i> Buy</button>
+          <button
+            class="wishListBtn flex-1 border border-amber-400 rounded-full transform hover:scale-105 text-amber-400 text-sm "><i
+              class="bi text-amber-400 text-xl bi-heart-fill"></i> Favourite</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3WXlPJHJfxdnsYnlQI_t7hmIB8IhirMPGnA&s" alt="" />
+
+      <div class="discount">18.6%</div>
+
+      <div class="details">
+        <div class="reviews"><i class="bi bi-star-fill"></i> 4.8</div>
+        <div class="title">Big Lash Mascara</div>
+        <div class="price">R170.99</div>
+        <div class="btn-group">
+          <button class="btn-secondary">View</button>
+          <button class="btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img
+        src="https://perilecosmetics.co.za/cdn/shop/files/Perile-Gentle_hydrating_cleanser_d4e01549-fe22-48c8-990b-eef23c272285.png?v=1722262785"
+        alt="" />
+
+      <div class="discount">50%</div>
+
+      <div class="details">
+        <div class="reviews"><i class="bi bi-star-fill"></i> 4.8</div>
+        <div class="title">Gentle hydrating cleanser</div>
+        <div class="price">R304.99</div>
+        <div class="btn-group">
+          <button class="btn-secondary">View</button>
+          <button class="btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://www.dischem.co.za/api/catalog/product/6/0/6009706020279.jpg?store=default&image-type=image"
+        alt="" />
+
+      <div class="discount">15%</div>
+
+      <div class="details">
+        <div class="reviews"><i class="bi bi-star-fill"></i> 4.8</div>
+        <div class="title">Nutriwomen Acne Solutions</div>
+        <div class="price">R267.97</div>
+        <div class="btn-group">
+          <button class="btn-secondary">View</button>
+          <button class="btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img
+        src="https://www.deluxeshop.co.za/cdn/shop/articles/deluxe-laser-environ-foaming-gel-cleanser_1.webp?v=1729109011"
+        alt="" />
+
+      <div class="discount">30%</div>
+
+      <div class="details">
+        <div class="reviews"><i class="bi bi-star-fill"></i> 4.8</div>
+        <div class="title">Foaming gel cleanser</div>
+        <div class="price">R280.99</div>
+        <div class="btn-group">
+          <button class="btn-secondary">View</button>
+          <button class="btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://justskinclinic.co.za/wp-content/uploads/2016/11/Skinceuticals-Anti-ageing-set-500x500.jpg"
+        alt="" />
+
+      <div class="discount">25%</div>
+
+      <div class="details">
+        <div class="reviews"><i class="bi bi-star-fill"></i> 4.8</div>
+        <div class="title">Anti-aging bulk</div>
+        <div class="price">R500.99</div>
+        <div class="btn-group">
+          <button class="btn-secondary">View</button>
+          <button class="btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://cdn.dummyjson.com/products/images/fragrances/Gucci%20Bloom%20Eau%20de/thumbnail.png" alt="" />
+
+      <div class="discount">10%</div>
+
+      <div class="details">
+        <div class="reviews"><i class="bi bi-star-fill"></i> 4.8</div>
+        <div class="title">Gucci Bloom</div>
+        <div class="price">R1149.99</div>
+        <div class="btn-group">
+          <button class="btn-secondary">View</button>
+          <button class="btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://cdn.pixabay.com/photo/2019/12/23/14/12/bottle-4714667_1280.jpg" alt="" />
+
+      <div class="discount">15%</div>
+
+      <div class="details">
+        <div class="reviews"><i class="bi bi-star-fill"></i> 4.8</div>
+        <div class="title">Narciso Rodriguez For Her Perfume</div>
+        <div class="price">R999.99</div>
+        <div class="btn-group">
+          <button class="btn-secondary">View</button>
+          <button class="btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://cdn.pixabay.com/photo/2019/10/09/00/02/bottle-4536178_1280.jpg" alt="" />
+
+      <div class="discount">10.6%</div>
+
+      <div class="details">
+        <div class="reviews"><i class="bi bi-star-fill"></i> 4.8</div>
+        <div class="title">Giorgio Armani Sì Eau de Parfum</div>
+        <div class="price">R858.79</div>
+        <div class="btn-group">
+          <button class="btn-secondary">View</button>
+          <button class="btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://cdn.pixabay.com/photo/2019/12/01/12/32/fragrance-4665404_1280.jpg" alt="" />
+
+      <div class="discount">15%</div>
+
+      <div class="details">
+        <div class="reviews"><i class="bi bi-star-fill"></i> 4.8</div>
+        <div class="title">YSL Libre Eau De Parfum</div>
+        <div class="price">R999.99</div>
+        <div class="btn-group">
+          <button class="btn-secondary">View</button>
+          <button class="btn-primary">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- footer -->
+  <footer class="h-[15rem] text-white p-10 flex justify-between items-center bg-emerald-900 ">
+    <div class="companyInfo">
+      <ul>
+        <li>
+          <b>Company Info</b>
+        </li>
+        <li>About Luxéia Noir</li>
+        <li>Fashion Blogger</li>
+        <li>Social Responsibility
+        </li>
+        <li>News</li>
+
+      </ul>
+    </div>
+
+    <div class="accountDetails ml-[5rem]">
+      <ul>
+        <li>
+
+        <li><b>Account</b></li>
+        <li> My account</li>
+        <li> Track order
+        </li>
+        <li>Return Order</li>
+        <li>Personal details</li>
+        </li>
+      </ul>
+    </div>
+
+    <div class="details">
+      <div class="footerDetails">
+        <h5 class="pr-[10rem] justify-content-center text-xl">Shaper | ABSA | Copyright 2025 | Luxéia Noir Online (Pty)
+          Ltd.</h5>
+      </div>
+
+      <div class="socials flex content-center gap-5 text-center text-4xl">
+
+        <i class="bi p-10 bi-facebook"></i>
+        <i class="bi p-10 bi-instagram"></i>
+        <i class="bi p-10 bi-twitter-x"></i>
+
+      </div>
+    </div>
+
+
+  </footer>
+</body>
+
+</html>
