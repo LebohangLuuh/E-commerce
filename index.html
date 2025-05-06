@@ -58,13 +58,13 @@
     </div>
   </section>
 
-  <div class="sideNav z-10 bg-emerald-900 right-0 top-[40%] fixed w-[5%] h-auto p-[1.2rem] rounded-3xl border]">
+  <div class="sideNav z-10 bg-emerald-900 right-0 top-[40%] fixed w-[5%] h-auto p-[1.2rem] rounded-r-none rounded-3xl border]">
       <div class="cartCount position-relative mb-5 ">
         <span class="bg-amber-400 rounded-full p-2 m-3 ">4</span>
-        <i class="bi text-3xl bi-bag-fill"></i>
+        <i id="cart-icon" class="bi text-3xl bi-bag-fill"></i>
       </div>
       <div>
-        <i class="bi text-3xl bi-heart-fill"></i>
+        <i id="wishList-icon" class="bi text-3xl bi-heart-fill"></i>
       </div>
   </div>
 
@@ -168,43 +168,56 @@
   <!-- cart modal -->
   <dialog class="w-[50%] overflow-x-hidden m-[auto] pr-[3rem]" id="cart-modal">
     <div class="modal-header border border-white border-b-amber-500 mb-5 ">
-      <h2 class="mb-5 mt-[3rem] text-emerald-900 text-3xl  ">Cart Contents</h2>
+      <h2 class="mb-5 mt-[3rem] text-emerald-900 text-3xl text-center">Cart Contents</h2>
       <button
         class="modal-close bg-emerald-900 text-3xl text-amber-400 rounded-full absolute top-10 right-10 ">&times;</button>
     </div>
-    <div class="modal-content flex flex-col">
+    <div class="modal-content p-10 flex flex-col">
       <!-- Cart items will be hardcoded here -->
-      <div class="cart-item">
-        <img src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
+      <div class="cart-item flex">
+        <div>
+          <img src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"
           alt="Essence Mascara Lash Princess" class="cart-item-image" />
-        <div class="cart-item-info">
-          <h4 class="cart-item-title">Essence Mascara Lash Princess</h4>
-          <p class="cart-item-price">Price: R9.99</p>
-          <p class="cart-item-quantity">Quantity: 1</p>
+        </div>
+        
+        <div class="cart-item-info m-10">
+          <h4 class="cart-item-title text-2xl text-gray-400 font-bold">Essence Mascara Lash Princess</h4>
+          <p class="cart-item-desc text-emerald-900 font-thin text-lg">This is a sample description for the product.</p>
+          <p class="cart-item-price text-amber-400 text-3xl font-thin">Price: R9.99</p>
+          <p class="cart-item-quantity text-2xl">Quantity: 1</p>
         </div>
       </div>
-      <div class="cart-item">
-        <img src="https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png"
+      <div class="cart-item flex ">
+        <div>
+          <img src="https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png"
           alt="Eyeshadow Palette with Mirror" class="cart-item-image" />
-        <div class="cart-item-info">
-          <h4 class="cart-item-title">Eyeshadow Palette with Mirror</h4>
-          <p class="cart-item-price">Price: R19.99</p>
-          <p class="cart-item-quantity">Quantity: 1</p>
+        </div>
+        
+        <div class="cart-item-info  m-10">
+          <h4 class="cart-item-title text-2xl text-gray-400 font-bold">Eyeshadow Palette with Mirror</h4>
+          <p class="cart-item-desc text-emerald-900 font-thin text-lg">This is a sample description for the product.</p>
+          <p class="cart-item-price text-amber-400 text-3xl font-thin">Price: R19.99</p>
+          <p class="cart-item-quantity text-2xl">Quantity: 1</p>
         </div>
       </div>
-      <div class="cart-item">
-        <img src="https://cdn.dummyjson.com/products/images/beauty/Powder%20Canister/thumbnail.png"
+
+      <div class="cart-item flex ">
+        <div>
+          <img src="https://cdn.dummyjson.com/products/images/beauty/Powder%20Canister/thumbnail.png"
           alt="Powder Canister" class="cart-item-image" />
-        <div class="cart-item-info">
-          <h4 class="cart-item-title">Powder Canister</h4>
-          <p class="cart-item-price">Price: R14.99</p>
-          <p class="cart-item-quantity">Quantity: 1</p>
+        </div>
+        
+        <div class="cart-item-info m-10">
+          <h4 class="cart-item-title text-2xl text-gray-400 font-bold">Powder Canister</h4>
+          <p class="cart-item-desc text-emerald-900 font-thin text-lg">This is a sample description for the product.</p>
+          <p class="cart-item-price text-amber-400 text-3xl font-thin">Price: R14.99</p>
+          <p class="cart-item-quantity text-2xl">Quantity: 1</p>
         </div>
       </div>
-      <div class="cart-summary">
-        <h3>Cart Summary</h3>
-        <p>Total: R44.97</p>
-        <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 text-white w-full">Checkout</button>
+      <div class="cart-summary text-end flex flex-col left-9 position-relative">
+        <h3 class="font-bold text-3xl">Cart Summary</h3>
+        <p class="text-amber-400 text-3xl font-thin ">Total: R44.97</p>
+        <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
       </div>
     </div>
   </dialog>
@@ -246,10 +259,6 @@
             alt="" />
         </div>
 
-        <!-- <div class="mySlides fade">
-          <img src="img_mountains_wide.jpg" style="width:100%">
-        </div> -->
-
         <a class="prev" onclick="plusSlides(-1)">❮</a>
         <a class="next" onclick="plusSlides(1)">❯</a>
 
@@ -259,7 +268,7 @@
   </dialog>
 
 <!-- products -->
-  <main class="p-40 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-20">
+  <main id="products-container" class="p-40 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-20">
 
 
   </main>

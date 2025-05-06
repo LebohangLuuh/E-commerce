@@ -32,15 +32,12 @@ function removeItem(cart, productId) {
 }
 
 function updateQuantity(cart, productId, delta) {
-  return cart
-    .map((item) => {
-      if (item.id === productId) {
+  return cart.map((item) => {if (item.id === productId) {
         const newQuantity = item.quantity + delta;
         return newQuantity > 0 ? { ...item, quantity: newQuantity } : null;
       }
       return item;
-    })
-    .filter(Boolean);
+    }).filter(Boolean);
 }
 
 function calculateTotal(cart) {
@@ -80,7 +77,7 @@ function validateProducts(products) {
     rating: product.rating.toFixed(1),
     discountPercentage: Math.round(product.discountPercentage),
     category : product.category,
-    warantee : product.warrantyInformation,
+    // warantee : product.warrantyInformation,
   }));
 }
 
