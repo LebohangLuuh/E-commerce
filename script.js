@@ -41,14 +41,18 @@ const domElements = {
 };
 
 
+const updateCartCount = () => {
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const countSpan = document.querySelector(".cartCount span");
+  if (countSpan) {
+    countSpan.textContent = cartCount;
+  }
+};
 
 // Cart Management
 const updateCartUI = () => {
   // Update cart count
-  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  if (domElements.cartIcon && domElements.cartIcon.querySelector("span")) {
-    domElements.cartIcon.querySelector("span").textContent = cartCount;
-  }
+  updateCartCount();
 
   // Update cart modal
   if (!domElements.modals.cart) return;
@@ -153,6 +157,76 @@ function showWishlistModal() {
 }
 
 
+function showProductModal(product) {
+  const modal = domElements.modals.product;
+  if (!modal) {
+    console.error("Product modal not found in the DOM");
+    return;
+  }
+
+  // Main image
+  const mainImg = modal.querySelector(".detailsModal > img");
+  if (mainImg) {
+    mainImg.src = product.thumbnail;
+    mainImg.alt = product.title;
+  }
+
+  // Gallery images (assuming product.images is an array)
+  const galleryImgs = modal.querySelectorAll(".detailsModal .flex-row img");
+  if (galleryImgs && Array.isArray(product.images)) {
+    galleryImgs.forEach((img, idx) => {
+      if (idx < product.images.length) {
+        img.src = product.images[idx];
+        img.alt = product.title;
+      }
+    });
+  }
+
+  // Brand
+  const brand = modal.querySelector(".brand");
+  if (brand) brand.textContent = `Brand: ${product.brand}`;
+
+  // Rating
+  const rating = modal.querySelector(".rating");
+  if (rating) rating.innerHTML = `<i class="bi text-amber-400 bi-star-fill"></i> ${product.rating}`;
+
+  // Discount
+  const discount = modal.querySelector(".discount");
+  if (discount) discount.textContent = `${product.discountPercentage}%`;
+
+  // Title
+  const title = modal.querySelector(".title");
+  if (title) title.textContent = product.title;
+
+  // Category
+  const category = modal.querySelector(".category");
+  if (category) category.textContent = `Category: ${product.category}`;
+
+  // Description
+  const description = modal.querySelector(".description");
+  if (description) description.textContent = product.description;
+
+  // Stock
+  const stock = modal.querySelector(".stock");
+  if (stock) stock.textContent = `Stock: ${product.stock}`;
+
+  // Quantity
+  const quantity = modal.querySelector(".quantity");
+  if (quantity) quantity.textContent = `Minimum order Quantity: ${product.minimumOrderQuantity}`;
+
+  // Price
+  const price = modal.querySelector(".price");
+  if (price) price.textContent = `R${product.price.toFixed(2)}`;
+
+  // Show the modal
+  if (typeof modal.showModal === "function") {
+    modal.showModal();
+  } else {
+    modal.style.display = "block";
+  }
+}
+
+
 // Event Handlers
 const setupEventListeners = () => {
   // Product interactions
@@ -166,25 +240,7 @@ const setupEventListeners = () => {
     const product = findProduct(currentProducts, productId);
 
     if (e.target.closest(".viewBtn")) {
-      const modal = domElements.modals.product;
-      if (!modal) {
-        console.error("Product modal not found in the DOM");
-        return;
-      }
-      
-      const productImage = modal.querySelector(".product-image");
-      const productTitle = modal.querySelector("h3");
-      const priceDisplay = modal.querySelector(".price-display");
-      const description = modal.querySelector(".description");
-      const category = modal.querySelector(".category");
-      
-      if (productImage) productImage.src = product.thumbnail;
-      if (productTitle) productTitle.textContent = product.title;
-      if (priceDisplay) priceDisplay.textContent = `R${product.price.toFixed(2)}`;
-      if (description) description.textContent = product.description;
-      if (category) category.textContent = product.category;
-      
-      modal.showModal();
+      showProductModal(product);
     }
 
     if (e.target.closest(".cartBtn")) {
@@ -444,33 +500,23 @@ function showCart() {
   if (cartDialog) cartDialog.showModal();
 }
 
-function wishList(params) {
+function wishList() {
   const wishList = document.querySelector("#wishlist-modal");
   if (wishList) wishList.showModal();
 }
 
+
+
 // Initialize event listeners
 document.addEventListener("DOMContentLoaded", () => {
-  // Add event listeners to "View Details" buttons
-  const viewProductButtons = document.querySelectorAll(".viewBtn");
-  viewProductButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const productCard = button.closest(".product-card");
-      if (!productCard) return;
-      
-      const productTitle = productCard.querySelector(".product-title")?.textContent;
-      const productPriceElement = productCard.querySelector(".product-price");
-      const productPrice = productPriceElement ? parseFloat(productPriceElement.textContent.replace("R", "")) : 0;
-      const productImage = productCard.querySelector("img")?.src;
-      const productDescription = "This is a sample description for the product.";
-
-      const product = {
-        title: productTitle || "Unknown Product",
-        price: productPrice,
-        image: productImage || "",
-        description: productDescription,
-      };
-      showProductDetails(product);
+  const viewBtns = domElements.productsContainer.querySelectorAll('.viewBtn');
+  viewBtns.forEach(btn => {
+    btn.addEventListener('click', function () {
+      const productId = this.getAttribute('data-id');
+      const product = products.find(p => String(p.id) === String(productId));
+      if (product) {
+        showProductModal(product);
+      }
     });
   });
 
@@ -513,26 +559,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   await renderProducts();
   setupEventListeners();
   
+  // Initialize cart count
+  updateCartCount();
+  
   // Add event listener to wishlist icon
   if (domElements.wishlistIcon) {
     domElements.wishlistIcon.addEventListener("click", showWishlistModal);
   }
 });
 
-//show product details 
-function showProductDetails(product) {
-  const modal = document.getElementById("product-modal");
-  if (!modal) return;
-  
-  const productImage = modal.querySelector(".product-image");
-  const productTitle = modal.querySelector("h3");
-  const priceDisplay = modal.querySelector(".price-display");
-  const description = modal.querySelector(".description");
-  
-  if (productImage) productImage.src = product.image;
-  if (productTitle) productTitle.textContent = product.title;
-  if (priceDisplay) priceDisplay.textContent = `R${product.price.toFixed(2)}`;
-  if (description) description.textContent = product.description;
-  
-  modal.showModal();
-}
+
