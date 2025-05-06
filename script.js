@@ -80,10 +80,39 @@ const updateCartUI = () => {
   const cartSummary = domElements.modals.cart.querySelector(".cart-summary");
   if (cartSummary) {
     const total = calculateTotal(cart);
+    // Fixed the missing equals sign in class attribute
     cartSummary.innerHTML = 
-    `<h3 class"text-emerald-500">Total: R${total.toFixed(2)}</h3>
-          <button class="btn-primary checkout-btn">Checkout</button>
-          <button class="clear-btn bg-red-500 text-white h-3xl ml-6 p-5" >Clear Cart</button>`;
+    `<h3 class="text-emerald-500">Total: R${total.toFixed(2)}</h3>
+     <button class="btn-primary checkout-btn">Checkout</button>
+     <button class="clear-btn bg-red-500 text-white h-3xl ml-6 p-5">Clear Cart</button>`;
+    
+    const clearBtn = cartSummary.querySelector(".clear-btn");
+    if (clearBtn) {
+      const newClearBtn = clearBtn.cloneNode(true);
+      clearBtn.parentNode.replaceChild(newClearBtn, clearBtn);
+      
+      newClearBtn.addEventListener("click", () => {
+        cart = clearCart();
+        updateCartUI();
+        alert("Cart has been cleared!");
+      });
+    }
+    
+    const checkoutBtn = cartSummary.querySelector(".checkout-btn");
+    if (checkoutBtn) {
+      // Remove any existing event listeners to prevent duplicates
+      const newCheckoutBtn = checkoutBtn.cloneNode(true);
+      checkoutBtn.parentNode.replaceChild(newCheckoutBtn, checkoutBtn);
+      
+      newCheckoutBtn.addEventListener("click", () => {
+        if (cart.length > 0) {
+          alert("Proceeding to checkout...");
+          // checkout logic
+        } else {
+          alert("Your cart is empty!");
+        }
+      });
+    }
   }
 };
 
@@ -144,7 +173,7 @@ const setupEventListeners = () => {
     if (e.target.closest(".cartBtn")) {
       cart = addItem(cart, product);
       updateCartUI();
-      showNotification("🛒 Added to cart ");
+      showNotification("✅ Added to cart ");
     }
 
     if (e.target.closest(".wishlist-btn")) {
@@ -264,9 +293,9 @@ function showNotification(message) {
     notification.style.bottom = '25rem';
     notification.style.right = '45rem';
     notification.style.backgroundColor = '#058743';
-    notification.style.color = 'white';
+    notification.style.color = 'yellow';
     notification.style.padding = '6rem';
-    notification.style.borderRadius = '4px';
+    notification.style.borderRadius = '15px';
     notification.style.zIndex = '1000';
     notification.style.transition = 'opacity 0.5s';
     document.body.appendChild(notification);
@@ -432,9 +461,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-//login
-// onclick = "document.getElementById('id02').style.display='none'";
 
 // Get the modal
 let modalLogin = document.getElementById("id02");
