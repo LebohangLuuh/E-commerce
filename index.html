@@ -175,63 +175,52 @@
     <div class="modal-content p-10 flex flex-col">
       <!-- Cart items will be hardcoded here -->
     
-      <div class="cart-summary text-end flex flex-col left-9 position-relative">
+      <!-- <div class="cart-summary text-end flex flex-col left-9 position-relative">
         <h3 class="font-bold text-3xl">Cart Summary</h3>
         <p class="text-amber-400 text-3xl font-thin ">Total: R44.97</p>
         <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
-      </div>
+      </div> -->
     </div>
   </dialog>
   <!--  -->
 
-
   <!-- product modal -->
   <dialog class="w-[50%] overflow-x-hidden m-[auto] pr-[3rem]" id="product-modal">
     <div class="modal-header border border-white border-b-amber-500 mb-5 ">
-      <h2 class="mb-5 mt-[3rem] text-emerald-900 text-3xl  ">Product Details</h2>
+      <h2 class="mb-5 mt-[3rem] text-emerald-900 text-3xl text-center ">Product Details</h2>
       <button
-        class="modal-close bg-emerald-900 text-3xl text-amber-400 rounded-full absolute top-10 right-10 ">&times;</button>
+        class="modal-close text-3xl text-emerald-900 rounded-full absolute top-10 right-10 ">&times;</button>
     </div>
 
-    <div class="detailsModal">
+    <div class="modal-content p-10 flex flex-row">
+    <div class="detailsModal flex-1  ">        
+        <img src="${item.thumbnail}" alt="${item.title}" />
+        <div class="flex flex-row flex-1">
+          <img src="${item.thumbnail}" alt="${item.title}" />
+          <img src="${item.thumbnail}" alt="${item.title}" />
+          <img src="${item.thumbnail}" alt="${item.title}" />
+        </div>
+        <h1 class="brand text-gray-500 text-xl font-bold">Brand: ${item.brand}</h1>
+        <p class="rating text-emerald-900 text-xl font-thin"><i class="bi text-amber-400 bi-star-fill"></i> ${item.rating}</p>
+        </div>
 
-      <div class="product">
-        <img src="https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/thumbnail.png" alt="" />
-
-        <div class="discount">19.6%</div>
-
-        <div class="details">
-          <div class="title">Red Nail Polish</div>
-          <div class="price">R32.79</div>
+        <div class="details flex-1 p-5 ">
+          <div class="discount bg-emerald-900 text-amber-400 text-center w-[5rem] rounded-full absolute rounded-r-none right-10 items-end flex">${item.discountPercentage}%</div>
+          <div class="title text-2xl text-gray-400 font-bold">${item.title}</div>
+          <h1 class="category text-gray-500 text-xl font-thin">Category: ${item.category}</h1>
+          <div class="description text-emerald-900  pb-5 border border-white border-b-gray-500">${item.description}</div>
+          <p class="stock text-emerald-900 mt-5 text-xl font-bold">Stock: ${item.stock}</p>
+          <h1 class="quantity text-amber-400 text-xl font-thin">Quantity: ${item.quantity}</h1>
+          <div class="price text-emerald-900 text-3xl font-bold">R${item.price.toFixed(2)}</div>
           <div class="btn-group">
-            <button class="btn-secondary">Add to WishList</button>
+            <button class="wishListBtn mt-5 rounded-full w-full hover:text-amber-400 transform hover:scale-105 h-auto bg-emerald-900 text-white ">Add to WishList</button>
           </div>
         </div>
       </div>
-
-      <div class="slideshow-container">
-
-        <div class="mySlides fade">
-          <img src="https://cdn.dummyjson.com/products/images/beauty/Red%20Nail%20Polish/thumbnail.png" alt="" />
-        </div>
-
-        <div class="mySlides fade">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLRhyAAsqndCg19JQfYlAGayKT7K4LttU4mg&s"
-            alt="" />
-        </div>
-
-        <a class="prev" onclick="plusSlides(-1)">❮</a>
-        <a class="next" onclick="plusSlides(1)">❯</a>
-
-      </div>
-
-    </div>
   </dialog>
 
 <!-- products -->
   <main id="products-container" class="p-40 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-20">
-
-
   </main>
 
   <!-- footer -->

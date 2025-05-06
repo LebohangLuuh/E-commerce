@@ -57,8 +57,7 @@ const updateCartUI = () => {
   if (!cartContent) return;
   
   cartContent.innerHTML = cart.length ? cart.map((item) => 
-    `<div class="cart-item flex" data-id="${item.id}">
-  <div>
+    `<div class="cart-item flex" data-id="${item.id}"><div>
             <img class="cart-item-image " src="${item.thumbnail}" alt="${item.title}">
             </div>
             <div class="cart-item-info m-10 w-full">
@@ -82,9 +81,12 @@ const updateCartUI = () => {
     const total = calculateTotal(cart);
     // Fixed the missing equals sign in class attribute
     cartSummary.innerHTML = 
-    `<h3 class="text-emerald-500">Total: R${total.toFixed(2)}</h3>
-     <button class="btn-primary checkout-btn">Checkout</button>
-     <button class="clear-btn bg-red-500 text-white h-3xl ml-6 p-5">Clear Cart</button>`;
+    `<div class="cart-summary text-end flex flex-col left-9 position-relative">
+    <h3 class="font-bold text-3xl">Cart Summary</h3>
+    <h3 class="text-amber-400 text-3xl font-thin ">Total: R${total.toFixed(2)}</h3>
+     <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
+     <button class="clear-btn bg-red-500 text-white h-3xl ml-6 p-5">Clear Cart</button>
+     </div>`;
     
     const clearBtn = cartSummary.querySelector(".clear-btn");
     if (clearBtn) {
@@ -125,15 +127,30 @@ const updateWishlistUI = () => {
   
   wishlistContent.innerHTML = wishlist.length
     ? wishlist.map((item) => `
-        <div class="wishlist-item" data-id="${item.id}">
-            <img src="${item.thumbnail}" class="wishlist-item-image">
-            <div class="wishlist-item-info">
-                <h4>${item.title}</h4>
-                <p>R${item.price.toFixed(2)}</p>
-                <button class="remove-btn bg-reg-500">Remove</button>
+        <div class="wishlist-item flex m-10" data-id="${item.id}">
+            <div>
+                <img src="${item.thumbnail}" class="wishlist-item-image w-[10rem]">
+            </div>
+            <div class="wishlist-item-info m-10 w-full">
+                <h4 class="text-2xl text-gray-400 font-bold">${item.title}</h4>
+                <p class="text-emerald-900 font-thin text-lg">${item.category}</p>
+                <h1 class="text-amber-400 text-3xl font-thin">R${item.price.toFixed(2)}</h1>
+                <button class="remove-btn mt-5 rounded-full w-full h-[3rem] bg-red-500 text-white">Remove</button>
             </div>
         </div> `).join(""): "<p>Your wishlist is empty</p>";
 };
+
+// Function to show wishlist modal
+function showWishlistModal() {
+  updateWishlistUI();
+  if (domElements.modals.wishlist) {
+    if (typeof domElements.modals.wishlist.showModal === "function") {
+      domElements.modals.wishlist.showModal();
+    } else {
+      domElements.modals.wishlist.style.display = "block";
+    }
+  }
+}
 
 
 // Event Handlers
@@ -176,7 +193,7 @@ const setupEventListeners = () => {
       showNotification("✅ Added to cart ");
     }
 
-    if (e.target.closest(".wishlist-btn")) {
+    if (e.target.closest(".wishListBtn")) {
       const result = toggleItem(wishlist, product);
       wishlist = result.updatedList;
       updateWishlistUI();
@@ -215,28 +232,36 @@ const setupEventListeners = () => {
     });
   }
 
+  if (domElements.wishlistIcon) {
+    domElements.wishlistIcon.addEventListener("click", showWishlistModal);
+  }
+
   // Wishlist interactions
-  // domElements.modals.wishlist.addEventListener("click", (e) => {
-  //   const itemElement = e.target.closest(".wishlist-item");
-  //   if (!itemElement) return;
+  if (domElements.modals.wishlist) {
+    domElements.modals.wishlist.addEventListener("click", (e) => {
+      if (e.target.closest(".remove-btn")) {
+        const itemElement = e.target.closest(".wishlist-item");
+        if (!itemElement) return;
+        
+        const productId = itemElement.dataset.id;
+        const product = findProduct(currentProducts, productId);
+        
+        if (product) {
+          const result = toggleItem(wishlist, product);
+          wishlist = result.updatedList;
+          updateWishlistUI();
+          showNotification("❌ Removed from wishlist");
+        }
+      }
+    });
+  }
 
-  //   const productId = parseInt(itemElement.dataset.id);
-  //   const product = findProduct(currentProducts, productId);
-
-  //   if (e.target.closest(".remove-btn")) {
-  //     const result = toggleItem(wishlist, product);
-  //     wishlist = result.updatedList;
-  //     updateWishlistUI();
-  //     showNotification("Removed from wishlist ❌");
-  //   }
-  // });
-
-  // // Modal close buttons
-  // document.querySelectorAll(".modal-close").forEach((btn) => {
-  //   btn.addEventListener("click", () => {
-  //     btn.closest("dialog").close();
-  //   });
-  // });
+  // Modal close buttons
+  document.querySelectorAll(".modal-close").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.closest("dialog").close();
+    });
+  });
 
 // products
 function renderProductList(products) {
@@ -385,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const passwordInput = document.getElementById('loginPassword');
   if (!emailInput || !passwordInput) return;
 
-  // 1) Load all registered users from localStorage  
+  // all registered users from localStorage  
   const users = JSON.parse(localStorage.getItem('users') || '[]'); 
 
   loginForm.addEventListener('submit', (e) => {
@@ -417,6 +442,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function showCart() {
   const cartDialog = document.querySelector("#cart-modal");
   if (cartDialog) cartDialog.showModal();
+}
+
+function wishList(params) {
+  const wishList = document.querySelector("#wishlist-modal");
+  if (wishList) wishList.showModal();
 }
 
 // Initialize event listeners
@@ -452,6 +482,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const wishlistIcon = document.querySelector(".wishlist")
+  if (wishlistIcon) {
+    wishlistIcon.addEventListener("click", () => {
+      wishList();
+    });
+  }
+
   // Close cart dialog
   const closeCartDialog = document.querySelector("#cart-modal .modal-close");
   if (closeCartDialog) {
@@ -475,9 +512,14 @@ let productItem = document.getElementById("product-modal");
 document.addEventListener("DOMContentLoaded", async () => {
   await renderProducts();
   setupEventListeners();
+  
+  // Add event listener to wishlist icon
+  if (domElements.wishlistIcon) {
+    domElements.wishlistIcon.addEventListener("click", showWishlistModal);
+  }
 });
 
-// Function to show product details (missing in original code)
+//show product details 
 function showProductDetails(product) {
   const modal = document.getElementById("product-modal");
   if (!modal) return;
