@@ -61,9 +61,9 @@ const updateCartUI = () => {
   <div>
             <img class="cart-item-image " src="${item.thumbnail}" alt="${item.title}">
             </div>
-            <div class="cart-item-info m-10">
+            <div class="cart-item-info m-10 w-full">
                 <h4 class="cart-item-title text-2xl text-gray-400 font-bold">${item.title}</h4>
-                <p class="cart-item-desc text-emerald-900 font-thin text-lg">${item.description}</p>
+                <p class="cart-item-desc text-emerald-900 font-thin text-lg">${item.category}</p>
                 <h1 class="cart-item-price text-amber-400 text-3xl font-thin">R${item.price.toFixed(2)} </h1>
                 <br> 
                 <div class="flex gap-2">
@@ -71,10 +71,9 @@ const updateCartUI = () => {
                      <p class="cart-item-quantity text-2xl">Quantity: ${item.quantity}</p>
                     <button class="quantity-btn" data-action="increase"><i class="bi text-4xl text-emerald-900 bi-plus-circle-fill"></i></button>
                 </div>
-                
+                    <p class="bold mt-5">Subtotal: R${(item.price * item.quantity).toFixed(2)}</p>
+                <button class="remove-btn mt-5 rounded-full w-full h-[3rem] bg-red-500 text-white ">Remove</button>
             </div>
-
-               
         </div>` ).join("") : "<p>Your cart is empty</p>";
 
   // Update cart summary
@@ -262,11 +261,11 @@ function showNotification(message) {
     notification = document.createElement('div');
     notification.id = 'notification';
     notification.style.position = 'fixed';
-    notification.style.bottom = '20px';
-    notification.style.right = '20px';
-    notification.style.backgroundColor = '#4CAF50';
+    notification.style.bottom = '25rem';
+    notification.style.right = '45rem';
+    notification.style.backgroundColor = '#058743';
     notification.style.color = 'white';
-    notification.style.padding = '16px';
+    notification.style.padding = '6rem';
     notification.style.borderRadius = '4px';
     notification.style.zIndex = '1000';
     notification.style.transition = 'opacity 0.5s';
