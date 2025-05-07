@@ -12,8 +12,8 @@ import {
 
 // Application State
 let currentProducts = [];
-let cart = [];
-let wishlist = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 
 const closeProductDialog = document.querySelector("dialog button");
 const form = document.getElementById("registerForm");
@@ -62,13 +62,11 @@ const updateCartSummary = () => {
     return;
   }
   
-  const total = calculateTotal(cart);
+  const total = calculateTotal(cart)
 
-  
-  
   cartSummaryContainer.innerHTML = `
  <div class="cart-summary text-end flex flex-col left-9 position-relative">
-      <h3 class="font-bold text-3xl">Cart Summary</h3>
+      <h3 class="font-bold text-emerald-900 text-3xl">Cart Summary</h3>
       <p class="text-amber-400 text-3xl font-thin ">Total: R${total.toFixed(2)}</p>
       <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-2 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
       <button class="clear-btn rounded-full hover:text-white  m-2 text-red-500 h-12  transform hover:scale-105 hover:bg-red-600 w-full">Clear Cart</button>
@@ -116,8 +114,11 @@ const updateCartUI = () => {
     return;
   }
   
+  localStorage.setItem('cart', JSON.stringify(cart));
+
   cartContent.innerHTML = cart.length ? cart.map((item) => 
-    `<div class="cart-item flex" data-id="${item.id}"><div>
+    `<div class="cart-item flex" data-id="${item.id}">
+        <div>
             <img class="cart-item-image " src="${item.thumbnail}" alt="${item.title}">
             </div>
             <div class="cart-item-info m-10 w-full">
@@ -131,45 +132,66 @@ const updateCartUI = () => {
                     <button class="quantity-btn" data-action="increase"><i class="bi text-4xl text-emerald-900 bi-plus-circle-fill"></i></button>
                 </div>
                     <p class="bold mt-5">Subtotal: R${(item.price * item.quantity).toFixed(2)}</p>
-                <button class="remove-btn mt-5 rounded-full w-full h-[3rem] bg-red-500 text-white ">Remove</button>
+                <button class="remove-btn mt-5 text-red-500 border border-gray-200 rounded-full w-full h-[3rem] hover:bg-red-500 hover:text-white ">Remove</button>
             </div>
         </div>` ).join("") : "<p>Your cart is empty</p>";
 
-  // Update cart summary after updating cart content
+  // Update cart summary 
   updateCartSummary();
 };
 
 // Wishlist Management
 const updateWishlistUI = () => {
-  if (!domElements.modals.wishlist) return;
+  console.log("Updating wishlist UI");
+  if (!domElements.modals.wishlist) {
+    console.error("Wishlist modal not found in updateWishlistUI");
+    return;
+  }
   
   const wishlistContent = domElements.modals.wishlist.querySelector(".modal-content");
-  if (!wishlistContent) return;
+  if (!wishlistContent) {
+    console.error("Modal content element not found in wishlist modal");
+    return;
+  }
+  
+  // Save wishlist to localStorage
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
   
   wishlistContent.innerHTML = wishlist.length
     ? wishlist.map((item) => `
         <div class="wishlist-item flex m-10" data-id="${item.id}">
             <div>
-                <img src="${item.thumbnail}" class="wishlist-item-image w-[10rem]">
+                <img src="${item.thumbnail}" class="wishlist-item-image">
             </div>
             <div class="wishlist-item-info m-10 w-full">
                 <h4 class="text-2xl text-gray-400 font-bold">${item.title}</h4>
                 <p class="text-emerald-900 font-thin text-lg">${item.category}</p>
                 <h1 class="text-amber-400 text-3xl font-thin">R${item.price.toFixed(2)}</h1>
-                <button class="remove-btn mt-5 rounded-full w-full h-[3rem] bg-red-500 text-white">Remove</button>
+                <button class="remove-btn mt-5 text-red-500 border border-gray-200 rounded-full w-full h-[3rem] hover:bg-red-500 hover:text-white">Remove</button>
             </div>
         </div> `).join(""): "<p>Your wishlist is empty</p>";
 };
 
 // show wishlist modal
 function showWishlistModal() {
+  console.log("showWishlistModal called");
   updateWishlistUI();
+  
   if (domElements.modals.wishlist) {
+    console.log("Wishlist modal found, attempting to show");
     if (typeof domElements.modals.wishlist.showModal === "function") {
       domElements.modals.wishlist.showModal();
     } else {
       domElements.modals.wishlist.style.display = "block";
+      // Add additional 
+      domElements.modals.wishlist.style.position = "fixed";
+      domElements.modals.wishlist.style.zIndex = "1000";
+      domElements.modals.wishlist.style.top = "50%";
+      domElements.modals.wishlist.style.left = "50%";
+      domElements.modals.wishlist.style.transform = "translate(-50%, -50%)";
     }
+  } else {
+    console.error("Wishlist modal element not found");
   }
 }
 
@@ -549,8 +571,8 @@ function showCart() {
 }
 
 function wishList() {
-  const wishList = document.querySelector("#wishlist-modal");
-  if (wishList) wishList.showModal();
+  console.log("wishList function called");
+  showWishlistModal();
 }
 
 
@@ -614,6 +636,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Add event listener to wishlist icon
   if (domElements.wishlistIcon) {
     domElements.wishlistIcon.addEventListener("click", showWishlistModal);
+    console.log("Wishlist icon event listener added");
+  } else {
+    console.error("Wishlist icon element not found");
+  }
+  
+  // Load wishlist from localStorage
+  wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+  
+  // Add event listener to wishlist icon 
+  const wishlistIconElement = document.querySelector(".wishlist");
+  if (wishlistIconElement) {
+    wishlistIconElement.addEventListener("click", showWishlistModal);
+    console.log("Additional wishlist icon event listener added");
   }
 });
 
