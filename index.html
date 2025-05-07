@@ -39,6 +39,15 @@
     </div>
 
     <div class="right flex items-center gap-5 p-10">
+
+      <div>
+        <p class="user">Welcome, <span id="username">${currentUser.name}</span></p>
+      </div>
+      <div>
+        <a class="hover:text-amber-400 hover:font-bold cursor-pointer"
+          onclick="document.getElementById('logout').style.display='block'"><i class="bi bi-box-arrow-left"></i> LogOut</a>
+      </div>
+
       <div>
         <a class="hover:text-amber-400 hover:font-bold"
           onclick="document.getElementById('id01').style.display='block'">Login</a>
@@ -54,44 +63,44 @@
   <section>
     <div class="bunner">
       <video class="h-[45rem] w-[100%] object-cover"
-        src="https://videos.pexels.com/video-files/28894402/12507251_2560_1440_60fps.mp4"
-        autoplay loop muted playsinline></video>
+        src="https://videos.pexels.com/video-files/28894402/12507251_2560_1440_60fps.mp4" autoplay loop muted
+        playsinline></video>
     </div>
   </section>
 
-  <div class="sideNav z-10 bg-emerald-900 right-0 top-[40%] fixed w-[5%] h-auto p-[1.2rem] rounded-r-none rounded-3xl border]">
-      <div class="cartCount position-relative mb-5 ">
-        <span class=" cartCount bg-amber-400 rounded-full p-2 m-3 ">0</span>
-        <i id="cart-icon" class="bi text-3xl bi-bag-fill"></i>
-      </div>
-      <div>
-        <i id="wishList-icon" class="bi text-3xl bi-heart-fill"></i>
-      </div>
+  <div
+    class="sideNav z-10 bg-emerald-900 right-0 top-[40%] fixed w-[5%] h-auto p-[1.2rem] rounded-r-none rounded-3xl border]">
+    <div class="cartCount position-relative mb-5 ">
+      <span class=" cartCount bg-amber-400 rounded-full p-2 m-3 ">0</span>
+      <i id="cart-icon" class="bi text-3xl bi-bag-fill"></i>
+    </div>
+    <div>
+      <i id="wishList-icon" class="bi text-3xl bi-heart-fill"></i>
+    </div>
   </div>
 
   <!-- Wishlist Modal -->
-<dialog id="wishlist-modal" class="modal w-[50%] overflow-x-hidden m-[auto] pr-[3rem]">
-  <div class="modal-box">
-    <h2 class="mb-5 mt-[3rem] text-emerald-900 font-normal text-3xl text-center pt-0 pl-10 pr-10">Your Luxéria Noir - Wish list</h2>
-    <h3 class="font-thin text-center text-amber-400 text-md"> Designed for dazzle, made to last</h3>
+  <dialog id="wishlist-modal" class="modal w-[50%] overflow-x-hidden m-[auto]">
+    <div class="modal-box border border-white border-b-emerald-900 bg-gray-300 w-full mb-5">
+      <h2 class="mb-5 mt-[3rem] text-emerald-900 font-normal text-3xl text-center pt-0 pl-10 pr-10">Your Luxéria Noir -
+        Wish list</h2>
+      <h3 class="font-normal mb-5 text-center text-amber-400 text-lg"> Designed for dazzle, made to last</h3>
 
-    <button
-        class="modal-close text-3xl text-emerald-900  absolute top-10 right-10 ">&times;</button>
+      <button class="modal-close text-3xl text-emerald-900 font-bold  absolute top-10 right-10 ">&times;</button>
     </div>
 
     <div class="modal-content m-5">
-      <!-- Wishlist items will be inserted here by JavaScript -->
+      <!-- Wishlist items will by JavaScript -->
     </div>
-  </div>
-</dialog>
+    </div>
+  </dialog>
 
   <!-- login modal -->
-  <div id="id01"
-    class="modalLogin hidden absolute inset-0 w-full h-fit pb-[15rem] bg-[rgba(8,63,26,0.364)] pt-5 z-5">
+  <div id="id01" class="modalLogin hidden absolute inset-0 w-full mt-[8rem] h-fit pb-[15rem] bg-[rgba(8,63,26,0.364)] pt-5 z-5">
 
     <form id="loginForm"
       class="modal-content justify-content-center items-center bg-white p-[5rem] mt-[5rem] ml-[35%] w-[35%] h-auto rounded-lg animate z-100"
-       method="post">
+      method="post">
 
       <div class="container items-center justify-content-center">
 
@@ -102,15 +111,15 @@
 
         <div class="Username ">
           <label class="text-black" for="uname">Email</label>
-          <input id="loginEmail" class="rounded-md border-black items-center mb-5 w-full text-black p-3 border" type="email"
-            placeholder="Enter your email" name="uname" required>
+          <input id="loginEmail" class="rounded-md border-black items-center mb-5 w-full text-black p-3 border"
+            type="email" placeholder="Enter your email" name="uname" required>
 
         </div>
 
         <div class="password">
           <label class="text-black" for="psw">Password</label>
-          <input id="loginPassword" class="rounded-md border-black items-center text-black w-full p-3  border" type="password"
-            placeholder="Enter Password" name="psw" required>
+          <input id="loginPassword" class="rounded-md border-black items-center text-black w-full p-3  border"
+            type="password" placeholder="Enter Password" name="psw" required>
 
         </div>
 
@@ -132,7 +141,7 @@
   </div>
 
   <!-- sign up -->
-  <div id="id03" class="modalReg hidden absolute inset-0 w-full mb-0 bg-[rgba(8,63,26,0.364)] pt-1 z-9">
+  <div id="id03" class="modalReg hidden absolute inset-0 w-full mb-0 mt-[8rem] bg-[rgba(8,63,26,0.364)] pt-1 z-9">
     <span onclick="document.getElementById('id03').style.display='none'" class="close"
       title="Close Modal">&times;</span>
     <form id="registerForm"
@@ -148,34 +157,35 @@
         <hr>
 
         <div class="form-group">
-        <label class="text-black text-start" for="email">Full Name</label>
+          <label class="text-black text-start" for="email">Full Name</label>
           <input class="rounded-md border-black items-center text-black p-3  w-full border" type="text"
             placeholder="Enter your full name" id="name" name="name" required>
         </div>
 
         <div class="form-group">
-        <label class="text-black " for="email">Email</label>
+          <label class="text-black " for="email">Email</label>
           <input class="rounded-md border-black items-center text-black p-3   w-full  border" type="email"
             placeholder="Enter Email" id="email" name="email" required>
         </div>
 
         <div class="form-group">
-        <label class="text-black " for="password">Password</label>
+          <label class="text-black " for="password">Password</label>
           <input class="rounded-md border-black items-center text-black p-3  w-full border" type="password"
-            placeholder="Enter Password" id="registerPassword" name="password"  required>
+            placeholder="Enter Password" id="registerPassword" name="password" required>
         </div>
 
         <div class="form-group">
-        <label class="text-black " id="confirmPassword" for="confirmPassword">Confirm Password</label>
+          <label class="text-black " id="confirmPassword" for="confirmPassword">Confirm Password</label>
           <input class="rounded-md border-black items-center text-black p-3  w-full border" type="password"
             placeholder="Enter your Password again" name="confirmPassword" required>
         </div>
 
-        <p class="text-black text-xs mt-2">By creating an account you agree to our <a class="text-blue-500" href="#">Terms &
+        <p class="text-black text-xs mt-2">By creating an account you agree to our <a class="text-blue-500"
+            href="#">Terms &
             Privacy</a>.</p>
 
-        <button id="register" class="signUpBtn bg-emerald-900 text-white mt-2 h-12 w-full rounded-full h-6 " type="submit"
-          class="signupbtn">Sign Up</button>
+        <button id="register" class="signUpBtn bg-emerald-900 text-white mt-2 h-12 w-full rounded-full h-6 "
+          type="submit" class="signupbtn">Sign Up</button>
         <button type="button" onclick="document.getElementById('id03').style.display='none'"
           class="cancelbtn hover:bg-red-500 hover:text-white text-red-500 mt-2 h-12 w-full rounded-full h-6 ">Cancel</button>
       </div>
@@ -186,17 +196,18 @@
   <dialog class="w-[50%] overflow-x-hidden m-[auto] pr-[3rem]" id="cart-modal">
     <div class="modal-header border border-white border-b-amber-500 mb-5 ">
       <h2 class="mb-5 mt-[3rem] text-emerald-900 text-3xl text-center">Cart Contents</h2>
-      <button
-        class="modal-close text-3xl text-emerald-900 absolute top-10 right-10 ">&times;</button>
+      <button class="modal-close text-3xl text-emerald-900 absolute top-10 right-10 ">&times;</button>
     </div>
     <div class="modal-content p-10 flex flex-col">
       <!-- Cart items will be hardcoded here -->
     </div>
 
-    <div class="cart-summary text-end border border-white p-5 border-t-emerald-900 flex flex-col left-9 position-relative">
+    <div
+      class="cart-summary text-end border border-white p-5 border-t-emerald-900 flex flex-col left-9 position-relative">
       <h3 class="font-bold text-3xl">Cart Summary</h3>
       <p class="text-amber-400 text-3xl font-thin ">Total: R44.97</p>
-      <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
+      <button
+        class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
     </div>
 
   </dialog>
@@ -206,40 +217,44 @@
   <dialog class="w-[50%] overflow-x-hidden m-[auto] pr-[3rem]" id="product-modal">
     <div class="modal-header border border-white border-b-amber-500 mb-5 ">
       <h2 class="mb-5 mt-[3rem] text-emerald-900 text-3xl text-center ">Product Details</h2>
-      <button
-        class="modal-close text-3xl text-emerald-900 rounded-full absolute top-10 right-10 ">&times;</button>
+      <button class="modal-close text-3xl text-emerald-900 rounded-full absolute top-10 right-10 ">&times;</button>
     </div>
 
     <div class="product-content p-10 flex flex-row">
-    <div class="detailsModal flex-1  ">        
+      <div class="detailsModal flex-1  ">
         <img src="${item.thumbnail}" alt="${item.title}" />
         <div class="altImagesContainer flex flex-row flex-1">
-          <img class = "altImages" src="" alt="" />
-          <img class ="altImages" src="" alt="" />
-          <img class = "altImages" src = "" alt="" />
+          <img class="altImages" src="" alt="" />
+          <img class="altImages" src="" alt="" />
+          <img class="altImages" src="" alt="" />
         </div>
         <h1 class="brand text-gray-500 text-xl font-bold">Brand: ${item.brand}</h1>
-        <p class="rating text-emerald-900 text-xl font-thin"><i class="bi text-amber-400 bi-star-fill"></i> ${item.rating}</p>
-        </div>
+        <p class="rating text-emerald-900 text-xl font-thin"><i class="bi text-amber-400 bi-star-fill"></i>
+          ${item.rating}</p>
+      </div>
 
-        <div class="details flex-1 p-5 ">
-          <div class="discount bg-emerald-900 text-amber-400 p-3 text-center w-[5rem] rounded-full absolute rounded-r-none right-10 items-end flex">${item.discountPercentage}%</div>
-          <div class="title text-2xl text-gray-400 font-thin">${item.title}</div>
-          <h1 class="category text-emerald-900 text-xl font-bold">Category: ${item.category}</h1>
-          <div class="description text-gray-500  pb-5 border border-white border-b-gray-500">${item.description}</div>
-          <p class="stock text-emerald-900 mt-5 text-xl font-bold">Stock: ${item.stock}</p>
-          <h1 class="quantity text-amber-400 text-xl font-thin">Quantity: ${item.quantity}</h1>
-          <h1 class="returnPolicy text-emerald-900 text-xl font-thin">returnPolicy: ${item.returnPolicy}</h1>
-          <h1 class="warrantyInfo text-gray-500 text-xl font-thin">Warranty: ${item.warrantyInformation}</h1>
-          <div class="price text-emerald-900 text-3xl font-thin">R${item.price.toFixed(2)}</div>
-          <div class="btn-group">
-            <button class="wishListBtn mt-5 rounded-full w-full hover:text-amber-400 transform hover:scale-105 h-auto bg-emerald-900 text-white ">Add to WishList</button>
-          </div>
+      <div class="details flex-1 p-5 ">
+        <div
+          class="discount bg-emerald-900 text-amber-400 p-3 text-center w-[5rem] rounded-full absolute rounded-r-none right-10 items-end flex">
+          ${item.discountPercentage}%</div>
+        <div class="title text-2xl text-gray-400 font-thin">${item.title}</div>
+        <h1 class="category text-emerald-900 text-xl font-bold">Category: ${item.category}</h1>
+        <div class="description text-gray-500  pb-5 border border-white border-b-gray-500">${item.description}</div>
+        <p class="stock text-emerald-900 mt-5 text-xl font-bold">Stock: ${item.stock}</p>
+        <h1 class="quantity text-amber-400 text-xl font-thin">Quantity: ${item.quantity}</h1>
+        <h1 class="returnPolicy text-emerald-900 text-xl font-thin">returnPolicy: ${item.returnPolicy}</h1>
+        <h1 class="warrantyInfo text-gray-500 text-xl font-thin">Warranty: ${item.warrantyInformation}</h1>
+        <div class="price text-emerald-900 text-3xl font-thin">R${item.price.toFixed(2)}</div>
+        <div class="btn-group">
+          <button
+            class="wishListBtn mt-5 rounded-full w-full hover:text-amber-400 transform hover:scale-105 h-auto bg-emerald-900 text-white ">Add
+            to WishList</button>
         </div>
       </div>
+    </div>
   </dialog>
 
-<!-- products -->
+  <!-- products -->
   <main id="products-container" class="p-40 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-20">
   </main>
 
@@ -275,7 +290,8 @@
 
     <div class="details">
       <div class="footerDetails">
-        <h5 class="pr-[10rem] justify-content-center items-center font-thin text-xl">Shaper | ABSA | Copyright 2025 | Luxéia Noir Online (Pty)
+        <h5 class="pr-[10rem] justify-content-center items-center font-thin text-xl">Shaper | ABSA | Copyright 2025 |
+          Luxéia Noir Online (Pty)
           Ltd.</h5>
       </div>
 
