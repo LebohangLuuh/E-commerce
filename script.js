@@ -8,7 +8,6 @@ import {
   fetchProducts,
   findProduct,
   clearCart,
-  filterProduct
 } from "./ecommerce.js";
 
 // Application State
@@ -39,12 +38,64 @@ const domElements = {
   },
 };
 
-
+// cart count
 const updateCartCount = () => {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const countSpan = document.querySelector(".cartCount span");
   if (countSpan) {
     countSpan.textContent = cartCount;
+  }
+};
+
+// update the cart summary
+const updateCartSummary = () => {
+  if (!domElements.modals.cart) {
+    console.error("Cart modal not found");
+    return;
+  }
+  
+  // Find the cart summary container - make sure this selector matches your HTML structure
+  const cartSummaryContainer = domElements.modals.cart.querySelector(".cart-summary");
+  console.log(cartSummaryContainer)
+  if (!(cartSummaryContainer)) {
+    console.error("Cart summary container not found");
+    return;
+  }
+  
+  const total = calculateTotal(cart);
+
+  
+  
+  cartSummaryContainer.innerHTML = `
+ <div class="cart-summary text-end flex flex-col left-9 position-relative">
+      <h3 class="font-bold text-3xl">Cart Summary</h3>
+      <p class="text-amber-400 text-3xl font-thin ">Total: R${total.toFixed(2)}</p>
+      <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-2 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
+      <button class="clear-btn rounded-full hover:text-white  m-2 text-red-500 h-12  transform hover:scale-105 hover:bg-red-600 w-full">Clear Cart</button>
+    </div>`;
+  
+  // Add event listener to checkout button
+  const checkoutBtn = cartSummaryContainer.querySelector(".btnCheckout");
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", () => {
+      if (cart.length > 0) {
+        alert("Proceeding to checkout...");
+        domElements.modals.cart.close();
+      }
+      else{
+        alert("Your cart is empty!");
+      }
+    });
+  }
+  
+  // Add event listener to clear cart button
+  const clearBtn = cartSummaryContainer.querySelector(".clear-btn");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      cart = clearCart();
+      updateCartUI();
+      alert("Cart has been cleared!");
+    });
   }
 };
 
@@ -54,10 +105,16 @@ const updateCartUI = () => {
   updateCartCount();
 
   // Update cart modal
-  if (!domElements.modals.cart) return;
+  if (!domElements.modals.cart) {
+    console.error("Cart modal not found");
+    return;
+  }
   
   const cartContent = domElements.modals.cart.querySelector(".modal-content");
-  if (!cartContent) return;
+  if (!cartContent) {
+    console.error("Cart modal content not found");
+    return;
+  }
   
   cartContent.innerHTML = cart.length ? cart.map((item) => 
     `<div class="cart-item flex" data-id="${item.id}"><div>
@@ -78,45 +135,8 @@ const updateCartUI = () => {
             </div>
         </div>` ).join("") : "<p>Your cart is empty</p>";
 
-  // Update cart summary
-  const cartSummary = domElements.modals.cart.querySelector(".cart-summary");
-  if (cartSummary) {
-    const total = calculateTotal(cart);
-    cartSummary.innerHTML = 
-    `<div class="cart-summary text-end flex flex-col left-9 position-relative">
-    <h3 class="font-bold text-3xl">Cart Summary</h3>
-    <h3 class="text-amber-400 text-3xl font-thin ">Total: R${total.toFixed(2)}</h3>
-     <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
-     <button class="clear-btn bg-red-500 text-white h-3xl ml-6 p-5">Clear Cart</button>
-     </div>`;
-    
-    const clearBtn = cartSummary.querySelector(".clear-btn");
-    if (clearBtn) {
-      const newClearBtn = clearBtn.cloneNode(true);
-      clearBtn.parentNode.replaceChild(newClearBtn, clearBtn);
-      
-      newClearBtn.addEventListener("click", () => {
-        cart = clearCart();
-        updateCartUI();
-        alert("Cart has been cleared!");
-      });
-    }
-    
-    const checkoutBtn = cartSummary.querySelector(".checkout-btn");
-    if (checkoutBtn) {
-      const newCheckoutBtn = checkoutBtn.cloneNode(true);
-      checkoutBtn.parentNode.replaceChild(newCheckoutBtn, checkoutBtn);
-      
-      newCheckoutBtn.addEventListener("click", () => {
-        if (cart.length > 0) {
-          alert("Proceeding to checkout...");
-          // checkout logic
-        } else {
-          alert("Your cart is empty!");
-        }
-      });
-    }
-  }
+  // Update cart summary after updating cart content
+  updateCartSummary();
 };
 
 // Wishlist Management
@@ -153,7 +173,7 @@ function showWishlistModal() {
   }
 }
 
-
+// show products
 function showProductModal(product) {
   const modal = domElements.modals.product;
   if (!modal) {
@@ -254,7 +274,6 @@ function showProductModal(product) {
     modal.style.display = "block";
   }
 }
-
 
 // Event Handlers
 const setupEventListeners = () => {
@@ -361,7 +380,6 @@ function renderProductList(products) {
         }
         <img src="${product.thumbnail}" alt="${product.title}">
         <div class="details text-center relative p-[2rem]">
-          <div class="reviews text-emerald-900 absolute right-5"><i class="bi text-amber-400 bi-star-fill"></i> ${product.rating}</div>
           <div class="title font-bold text-gray-500">${product.title}</div>
           <div class="price text-emerald-900 font-bold text-3xl">R${product.price.toFixed(2)}</div>
           <div class="title font-thin text-gray-500">${product.category}</div>
@@ -525,6 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Function to show cart contents in a dialog
 function showCart() {
+  updateCartUI(); // Ensure cart UI is updated before showing the modal
   const cartDialog = document.querySelector("#cart-modal");
   if (cartDialog) cartDialog.showModal();
 }
@@ -588,8 +607,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   await renderProducts();
   setupEventListeners();
   
-  // Initialize cart count
+  // Initialize cart count and summary
   updateCartCount();
+  updateCartSummary();
   
   // Add event listener to wishlist icon
   if (domElements.wishlistIcon) {

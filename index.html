@@ -19,7 +19,7 @@
 </head>
 
 <body class="bg-teal-50 text-white font-poppins flex flex-col ">
-  <nav class="bg-emerald-900 flex items-center h-[8rem] sticky justify-between p-10 ">
+  <nav class="bg-emerald-900 flex items-center h-[8rem] top-0 z-100 sticky justify-between p-10 ">
     <div class="logo text-amber-400 font-bold text-4xl">
       Luxéria Noir
       <p class="slogan font-thin font-sans text-sm">Designed for dazzle, made to last</p>
@@ -50,11 +50,12 @@
     </div>
   </nav>
 
+
   <section>
     <div class="bunner">
-      <img class="h-[35rem] w-full"
-        src="https://img1.wsimg.com/isteam/stock/8971/:/cr=t:15.96%25,l:0%25,w:100%25,h:68.09%25/rs=w:515,h:234,cg:true"
-        alt="" />
+      <video class="h-[45rem] w-[100%] object-cover"
+        src="https://videos.pexels.com/video-files/28894402/12507251_2560_1440_60fps.mp4"
+        autoplay loop muted playsinline></video>
     </div>
   </section>
 
@@ -174,13 +175,14 @@
     </div>
     <div class="modal-content p-10 flex flex-col">
       <!-- Cart items will be hardcoded here -->
-    
-      <!-- <div class="cart-summary text-end flex flex-col left-9 position-relative">
-        <h3 class="font-bold text-3xl">Cart Summary</h3>
-        <p class="text-amber-400 text-3xl font-thin ">Total: R44.97</p>
-        <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
-      </div> -->
     </div>
+
+    <div class="cart-summary text-end border border-white p-5 border-t-emerald-900 flex flex-col left-9 position-relative">
+      <h3 class="font-bold text-3xl">Cart Summary</h3>
+      <p class="text-amber-400 text-3xl font-thin ">Total: R44.97</p>
+      <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-10 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
+    </div>
+
   </dialog>
   <!--  -->
 

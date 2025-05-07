@@ -44,7 +44,6 @@ function calculateTotal(cart) {
 }
 
 // Wishlist operations
-
 function toggleItem(wishlist, product) {
   const index = wishlist.findIndex((item) => item.id === product.id);
   if (index > -1) {
