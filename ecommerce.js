@@ -13,7 +13,6 @@ function addItem(cart, product) {
 function clearCart(cart) {
   console.log("clear cart");
   cart.length = 0;
-  // cart.splice(0, cart.length);
   updateCartUI();
   return cart;    
 }
@@ -61,23 +60,10 @@ async function fetchProducts() {
     const response = await fetch("https://dummyjson.com/products");
     if (!response.ok) throw new Error("Failed to fetch products");
     const { products } = await response.json();
-    return validateProducts(products);
+    return products;
   } catch (error) {
     throw new Error(`Product Service Error: ${error.message}`);
   }
-}
-
-function validateProducts(products) {
-  return products.map((product) => ({
-    id: product.id,
-    title: product.title,
-    price: product.price,
-    description: product.description,
-    thumbnail: product.thumbnail,
-    rating: product.rating.toFixed(1),
-    discountPercentage: Math.round(product.discountPercentage),
-    category : product.category,
-  }));
 }
 
 function findProduct(products, productId) {
@@ -90,7 +76,6 @@ export {
   updateQuantity,
   calculateTotal,
   toggleItem,
-  validateProducts,
   fetchProducts,
   findProduct,
   clearCart,

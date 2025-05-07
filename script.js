@@ -5,7 +5,6 @@ import {
   updateQuantity,
   calculateTotal,
   toggleItem,
-  validateProducts,
   fetchProducts,
   findProduct,
   clearCart,
@@ -83,7 +82,6 @@ const updateCartUI = () => {
   const cartSummary = domElements.modals.cart.querySelector(".cart-summary");
   if (cartSummary) {
     const total = calculateTotal(cart);
-    // Fixed the missing equals sign in class attribute
     cartSummary.innerHTML = 
     `<div class="cart-summary text-end flex flex-col left-9 position-relative">
     <h3 class="font-bold text-3xl">Cart Summary</h3>
@@ -106,7 +104,6 @@ const updateCartUI = () => {
     
     const checkoutBtn = cartSummary.querySelector(".checkout-btn");
     if (checkoutBtn) {
-      // Remove any existing event listeners to prevent duplicates
       const newCheckoutBtn = checkoutBtn.cloneNode(true);
       checkoutBtn.parentNode.replaceChild(newCheckoutBtn, checkoutBtn);
       
@@ -144,7 +141,7 @@ const updateWishlistUI = () => {
         </div> `).join(""): "<p>Your wishlist is empty</p>";
 };
 
-// Function to show wishlist modal
+// show wishlist modal
 function showWishlistModal() {
   updateWishlistUI();
   if (domElements.modals.wishlist) {
@@ -171,15 +168,28 @@ function showProductModal(product) {
     mainImg.alt = product.title;
   }
 
-  // Gallery images (assuming product.images is an array)
-  const galleryImgs = modal.querySelectorAll(".detailsModal .flex-row img");
-  if (galleryImgs && Array.isArray(product.images)) {
-    galleryImgs.forEach((img, idx) => {
-      if (idx < product.images.length) {
-        img.src = product.images[idx];
-        img.alt = product.title;
-      }
+  // alternative images container
+  const altImagesContainer = modal.querySelector(".altImagesContainer");
+  if (altImagesContainer) {
+    // alternative image elements
+    const altImages = altImagesContainer.querySelectorAll(".altImages");
+    altImagesContainer.className = "altImagesContainer flex flex-row flex-1 w-[30%]"
+    
+    // clear images 
+    altImages.forEach(imgElement => {
+      imgElement.src = "";
+      imgElement.alt = "";
     });
+    
+    // alternative images
+    if (product.images && product.images.length > 0) {
+      altImages.forEach((imgElement, index) => {
+        if (index < product.images.length) {
+          imgElement.src = product.images[index];
+          imgElement.alt = product.title;
+        }
+      });
+    }
   }
 
   // Brand
@@ -188,7 +198,18 @@ function showProductModal(product) {
 
   // Rating
   const rating = modal.querySelector(".rating");
-  if (rating) rating.innerHTML = `<i class="bi text-amber-400 bi-star-fill"></i> ${product.rating}`;
+  if (rating) {
+    // round rating to the nearest integer
+    const roundedRating = Math.round(product.rating);
+    
+    //  stars rating
+    let starsHTML = '';
+    for (let i = 0; i < roundedRating; i++) {
+      starsHTML += '<i class="bi gap-1  text-amber-400 bi-star-fill"></i> ';
+    }
+    
+    rating.innerHTML = `Rating : ${starsHTML}`;
+  }
 
   // Discount
   const discount = modal.querySelector(".discount");
@@ -213,6 +234,14 @@ function showProductModal(product) {
   // Quantity
   const quantity = modal.querySelector(".quantity");
   if (quantity) quantity.textContent = `Minimum order Quantity: ${product.minimumOrderQuantity}`;
+
+  // return policy
+  const returnPolicy = modal.querySelector(".returnPolicy");
+  if (returnPolicy) returnPolicy.textContent = `Return Policy: ${product.returnPolicy}`
+    
+  // warranty info
+  const warranty = modal.querySelector(".warrantyInfo");
+  if (warranty) warranty.textContent = `Warranty Info : ${product.warrantyInformation}`
 
   // Price
   const price = modal.querySelector(".price");
@@ -513,7 +542,7 @@ document.addEventListener("DOMContentLoaded", () => {
   viewBtns.forEach(btn => {
     btn.addEventListener('click', function () {
       const productId = this.getAttribute('data-id');
-      const product = products.find(p => String(p.id) === String(productId));
+      const product = currentProducts.find(p => String(p.id) === String(productId));
       if (product) {
         showProductModal(product);
       }

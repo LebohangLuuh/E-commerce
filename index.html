@@ -195,23 +195,25 @@
     <div class="product-content p-10 flex flex-row">
     <div class="detailsModal flex-1  ">        
         <img src="${item.thumbnail}" alt="${item.title}" />
-        <div class="flex flex-row flex-1">
-          <img src="${item.thumbnail}" alt="${item.title}" />
-          <img src="${item.thumbnail}" alt="${item.title}" />
-          <img src="${item.thumbnail}" alt="${item.title}" />
+        <div class="altImagesContainer flex flex-row flex-1">
+          <img class = "altImages" src="" alt="" />
+          <img class ="altImages" src="" alt="" />
+          <img class = "altImages" src = "" alt="" />
         </div>
         <h1 class="brand text-gray-500 text-xl font-bold">Brand: ${item.brand}</h1>
         <p class="rating text-emerald-900 text-xl font-thin"><i class="bi text-amber-400 bi-star-fill"></i> ${item.rating}</p>
         </div>
 
         <div class="details flex-1 p-5 ">
-          <div class="discount bg-emerald-900 text-amber-400 text-center w-[5rem] rounded-full absolute rounded-r-none right-10 items-end flex">${item.discountPercentage}%</div>
-          <div class="title text-2xl text-gray-400 font-bold">${item.title}</div>
-          <h1 class="category text-gray-500 text-xl font-thin">Category: ${item.category}</h1>
-          <div class="description text-emerald-900  pb-5 border border-white border-b-gray-500">${item.description}</div>
+          <div class="discount bg-emerald-900 text-amber-400 p-3 text-center w-[5rem] rounded-full absolute rounded-r-none right-10 items-end flex">${item.discountPercentage}%</div>
+          <div class="title text-2xl text-gray-400 font-thin">${item.title}</div>
+          <h1 class="category text-emerald-900 text-xl font-bold">Category: ${item.category}</h1>
+          <div class="description text-gray-500  pb-5 border border-white border-b-gray-500">${item.description}</div>
           <p class="stock text-emerald-900 mt-5 text-xl font-bold">Stock: ${item.stock}</p>
           <h1 class="quantity text-amber-400 text-xl font-thin">Quantity: ${item.quantity}</h1>
-          <div class="price text-emerald-900 text-3xl font-bold">R${item.price.toFixed(2)}</div>
+          <h1 class="returnPolicy text-emerald-900 text-xl font-thin">returnPolicy: ${item.returnPolicy}</h1>
+          <h1 class="warrantyInfo text-gray-500 text-xl font-thin">Warranty: ${item.warrantyInformation}</h1>
+          <div class="price text-emerald-900 text-3xl font-thin">R${item.price.toFixed(2)}</div>
           <div class="btn-group">
             <button class="wishListBtn mt-5 rounded-full w-full hover:text-amber-400 transform hover:scale-105 h-auto bg-emerald-900 text-white ">Add to WishList</button>
           </div>
