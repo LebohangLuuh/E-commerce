@@ -41,19 +41,19 @@
     <div class="right flex items-center gap-5 p-10">
 
       <div>
-        <p class="user">Welcome, <span id="username">${currentUser.name}</span></p>
+        <p class="user hidden">Welcome, <span id="username">${currentUser.name}</span></p>
       </div>
       <div>
-        <a class="hover:text-amber-400 hover:font-bold cursor-pointer"
+        <a class="logout hover:text-amber-400 hover:font-bold cursor-pointer hidden"
           onclick="document.getElementById('logout').style.display='block'"><i class="bi bi-box-arrow-left"></i> LogOut</a>
       </div>
 
       <div>
-        <a class="hover:text-amber-400 hover:font-bold"
+        <a class="login hover:text-amber-400 hover:font-bold"
           onclick="document.getElementById('id01').style.display='block'">Login</a>
       </div>
       <div>
-        <a class="hover:text-amber-400 hover:font-bold" onclick="document.getElementById('id03').style.display='block'"
+        <a class="register hover:text-amber-400 hover:font-bold" onclick="document.getElementById('id03').style.display='block'"
           style="width:auto;">Register</a>
       </div>
     </div>
@@ -66,6 +66,7 @@
         src="https://videos.pexels.com/video-files/28894402/12507251_2560_1440_60fps.mp4" autoplay loop muted
         playsinline></video>
     </div>
+
   </section>
 
   <div

@@ -54,7 +54,7 @@ const updateCartSummary = () => {
     return;
   }
 
-  // Find the cart summary container - make sure this selector matches your HTML structure
+  // Find the cart summary container
   const cartSummaryContainer = domElements.modals.cart.querySelector(".cart-summary");
   console.log(cartSummaryContainer)
   if (!(cartSummaryContainer)) {
@@ -72,17 +72,17 @@ const updateCartSummary = () => {
       <button class="clear-btn rounded-full hover:text-white  m-2 text-red-500 h-12  transform hover:scale-105 hover:bg-red-600 w-full">Clear Cart</button>
     </div>`;
 
-  // Add event listener to checkout button
+  // event listener to checkout button
   const checkoutBtn = cartSummaryContainer.querySelector(".btnCheckout");
   if (checkoutBtn) {
     checkoutBtn.addEventListener("click", () => {
       if (cart.length > 0) {
         alert("Proceeding to checkout...");
-        if (users.isLoggedIn && users.currentUser) {
+        if (localStorage.getItem("currentUser")) {
           domElements.modals.cart.close();
         }
         else {
-          alert("Please log in checkout.");
+          alert("Please log in to checkout.");
           domElements.modals.cart.close();
           document.getElementById('id01').style.display='block'
         }
@@ -93,7 +93,7 @@ const updateCartSummary = () => {
     });
   }
 
-  // Add event listener to clear cart button
+  //event listener to clear cart button
   const clearBtn = cartSummaryContainer.querySelector(".clear-btn");
   if (clearBtn) {
     clearBtn.addEventListener("click", () => {
@@ -190,7 +190,6 @@ function showWishlistModal() {
       domElements.modals.wishlist.showModal();
     } else {
       domElements.modals.wishlist.style.display = "block";
-      // Add additional 
       domElements.modals.wishlist.style.position = "fixed";
       domElements.modals.wishlist.style.zIndex = "1000";
       domElements.modals.wishlist.style.top = "50%";
@@ -534,6 +533,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// hide and show login/logout state
+function updateLoginState() {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  
+  const loginLink = document.querySelector(".login");
+  const registerLink = document.querySelector(".register");
+  const logoutLink = document.querySelector(".logout");
+  const userWelcome = document.querySelector(".user");
+  const usernameSpan = document.getElementById("username");
+  
+  if (currentUser) {
+    // User is logged in
+    loginLink.classList.add("hidden");
+    registerLink.classList.add("hidden");
+    logoutLink.classList.remove("hidden");
+    userWelcome.classList.remove("hidden");
+    
+    // Set the username in the welcome message
+    if (usernameSpan) {
+      usernameSpan.textContent = currentUser.name;
+    }
+  } else {
+    // User is logged out
+    loginLink.classList.remove("hidden");
+    registerLink.classList.remove("hidden");
+    logoutLink.classList.add("hidden");
+    userWelcome.classList.add("hidden");
+  }
+}
+
 // login
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('loginForm');
@@ -568,7 +597,10 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('Login successful!');
     emailInput.value = '';
     passwordInput.value = '';
-    document.getElementById('id01').style.display = 'none'
+    document.getElementById('id01').style.display = 'none';
+    
+    // Update the UI to reflect logged-in state
+    updateLoginState();
   });
 });
 
@@ -659,6 +691,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (wishlistIconElement) {
     wishlistIconElement.addEventListener("click", showWishlistModal);
     console.log("Additional wishlist icon event listener added");
+  }
+  
+  // Update login/logout state
+  updateLoginState();
+  
+  // Add logout functionality
+  const logoutLink = document.querySelector(".logout");
+  if (logoutLink) {
+    logoutLink.addEventListener("click", function() {
+      // Clear user data from localStorage
+      localStorage.removeItem("currentUser");
+      // Update the UI
+      updateLoginState();
+      // Show a logout message
+      alert("You have been logged out successfully");
+    });
   }
 });
 
