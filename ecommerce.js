@@ -78,5 +78,5 @@ export {
   fetchProducts,
   findProduct,
   clearCart,
-  filterProduct
+  filterProduct,
 };

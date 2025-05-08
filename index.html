@@ -62,12 +62,15 @@
 
   <section>
     <div class="bunner">
-      <video class="h-[45rem] w-[100%] object-cover"
+      <video class="h-[50rem] w-[100%] object-cover"
         src="https://videos.pexels.com/video-files/28894402/12507251_2560_1440_60fps.mp4" autoplay loop muted
         playsinline></video>
     </div>
-
   </section>
+
+  <div onclick="location.href='#products-container'" class="absolute inset-x-0 flex transform  justify-center items-center mt-[25rem]">
+    <button id="shopBtn" class="bg-amber-400 hover:text-2xl hover:scale-120 pointer-cursor text-white h-[3rem] w-[20rem] rounded-full">SHOP</button>
+  </div>
 
   <div
     class="sideNav z-10 bg-emerald-900 right-0 top-[40%] fixed w-[5%] h-auto p-[1.2rem] rounded-r-none rounded-3xl border]">
@@ -255,10 +258,11 @@
     </div>
   </dialog>
 
-  <!-- products -->
-  <main id="products-container" class="p-40 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-20">
-  </main>
+    <!-- products -->
 
+    <main id="products-container" class="p-40 grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-20">
+    </main>
+  
   <!-- footer -->
   <footer class="h-[15rem] text-white p-10 flex justify-between items-center bg-emerald-900 ">
     <div class="companyInfo">
