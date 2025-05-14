@@ -69,7 +69,7 @@ const updateCartSummary = () => {
       <h3 class="font-bold text-emerald-900 text-3xl">Cart Summary</h3>
       <p class="text-amber-400 text-3xl font-thin ">Total: R${total.toFixed(2)}</p>
       <button class="btnCheckout rounded-full bg-emerald-900 h-12 m-2 transform hover:scale-105 hover:bg-emerald-900 hover:text-amber-400 text-white w-full">Checkout</button>
-      <button class="clear-btn rounded-full hover:text-white  m-2 text-red-500 h-12  transform hover:scale-105 hover:bg-red-600 w-full">Clear Cart</button>
+      <button onclick='clearCart()' class="clear-btn rounded-full hover:text-white  m-2 text-red-500 h-12  transform hover:scale-105 hover:bg-red-600 w-full">Clear Cart</button>
     </div>`;
 
   // event listener to checkout button

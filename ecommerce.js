@@ -9,7 +9,7 @@ function addItem(cart, product) {
   return cart;
 }
 
-
+// clear cart
 function clearCart(cart) {
   console.log("clear cart");
   cart.length = 0;
@@ -17,7 +17,7 @@ function clearCart(cart) {
   return cart;    
 }
 
-// //filter product by category
+//filter product by category
 function filterProduct(products, category) {
   if (!category) return products; 
   return products.filter(product => 
